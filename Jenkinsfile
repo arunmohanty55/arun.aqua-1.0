@@ -18,7 +18,13 @@ pipeline{
               }
               stage ('deploy'){
                   steps{
-                     sh 'docker run -d -p 5000:5000 --name arun-aqua arun-aqua:1.0'
+                     sh '''
+                    docker rm -f arun-aqua || true
+                    docker run -d \
+                      -p 5000:5000 \
+                      --name arun-aqua \
+                      arun-aqua:1.0
+                '''
                   }
               }
           }
