@@ -1,5 +1,7 @@
-pipeline{
-    agent 'dev'
+pipeline {
+    agent {
+        label 'dev'
+    }
     stages{
         stage ('code clon'){
             steps{
