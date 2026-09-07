@@ -8,7 +8,7 @@ pipeline{
         }
         stage ('build'){
             steps{
-                sh 'docker build -t arun-aqua:1.0 .'
+                sh 'docker build -t arun-aqua:2.0 .'
             }
         }
         stage ('test'){
@@ -24,8 +24,8 @@ pipeline{
                     usernameVariable: "dockerHubUser"
                     )]){
                 sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker image tag arun-aqua:1.0 ${env.dockerHubUser}/arun-aqua1.0:latest"
-                sh "docker push ${env.dockerHubUser}/arun-aqua1.0:latest"
+                sh "docker image tag arun-aqua:2.0 ${env.dockerHubUser}/arun-aqua2.0:latest"
+                sh "docker push ${env.dockerHubUser}/arun-aqua2.0:latest"
             }
         }
 }
@@ -34,7 +34,7 @@ pipeline{
             steps{
                sh '''
             docker rm -f arun-aqua 2>/dev/null || true
-            docker run -d --name arun-aqua -p 5000:5000 arun-aqua:1.0
+            docker run -d --name arun-aqua -p 5000:5000 arun-aqua:2.0
         '''
             }
         }
